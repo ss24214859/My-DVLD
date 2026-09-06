@@ -106,58 +106,6 @@ namespace DVLD_DataAccess
             return (rowsAffected > 0);
         }
 
-        public static bool DeleteTestType(int TestTypeID)
-        {
-            int rowsAffected = 0;
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-            string query = "DELETE FROM TestTypes WHERE TestTypeID = @TestTypeID";
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
-
-            try
-            {
-                connection.Open();
-                rowsAffected = command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                // Log Exception
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return (rowsAffected > 0);
-        }
-
-        public static bool IsTestTypeExist(int TestTypeID)
-        {
-            bool isFound = false;
-            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
-            string query = "SELECT Found=1 FROM TestTypes WHERE TestTypeID = @TestTypeID";
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
-
-            try
-            {
-                connection.Open();
-                object result = command.ExecuteScalar();
-                if (result != null)
-                {
-                    isFound = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                // Log Exception
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return isFound;
-        }
-
         public static DataTable GetAllTestTypes()
         {
             DataTable dt = new DataTable();

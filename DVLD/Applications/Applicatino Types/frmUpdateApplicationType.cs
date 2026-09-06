@@ -14,7 +14,7 @@ namespace DVLD.Applications.Applicatino_Types
     public partial class frmUpdateApplicationType : Form
     {
         int _ID;
-        clsApplicationType _applicationType;
+        clsApplicationType _ApplicationType;
         public frmUpdateApplicationType(int ID)
         {
             InitializeComponent();
@@ -24,9 +24,9 @@ namespace DVLD.Applications.Applicatino_Types
         private void frmUpdateApplicationType_Load(object sender, EventArgs e)
         {
             lblID.Text = _ID.ToString();
-            _applicationType = clsApplicationType.Find(_ID);
+            _ApplicationType = clsApplicationType.Find(_ID);
 
-            if (_applicationType == null)
+            if (_ApplicationType == null)
             {
                 MessageBox.Show("Application Type not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
@@ -34,8 +34,8 @@ namespace DVLD.Applications.Applicatino_Types
             }
             else
             {
-                tbTitle.Text = _applicationType.ApplicationTypeTitle;
-                tbFees.Text = _applicationType.ApplicationFees.ToString("F2");
+                tbTitle.Text = _ApplicationType.ApplicationTypeTitle;
+                tbFees.Text = _ApplicationType.ApplicationFees.ToString("F2");
             }
         }
 
@@ -46,13 +46,13 @@ namespace DVLD.Applications.Applicatino_Types
                 MessageBox.Show("Some Fields are Invalid!", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            _applicationType.ApplicationTypeTitle = tbTitle.Text;
-            _applicationType.ApplicationFees = decimal.Parse(tbFees.Text);
+            _ApplicationType.ApplicationTypeTitle = tbTitle.Text;
+            _ApplicationType.ApplicationFees = decimal.Parse(tbFees.Text);
 
             if(MessageBox.Show("Are you sure you want to update the Application Type?", "Confirm Update", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 return;
             
-            if (_applicationType.Save())
+            if (_ApplicationType.Save())
             {
                 MessageBox.Show("Application Type updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -93,7 +93,7 @@ namespace DVLD.Applications.Applicatino_Types
                 errorProvider1.SetError(tbFees, "");
             }
 
-            if (clsValidation.IsNumber(tbFees.Text))
+            if (!clsValidation.IsNumber(tbFees.Text))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(tbFees, "Invalid fees format.");

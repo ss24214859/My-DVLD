@@ -94,17 +94,5 @@ namespace DVLD_BusinessLogic
             
             return clsTestTypeData.GetAllTestTypes();
         }
-
-        public static bool DeleteTestType(int TestTypeID)
-        {
-            
-            return clsTestTypeData.DeleteTestType(TestTypeID);
-        }
-
-        public static bool IsTestTypeExist(int TestTypeID)
-        {
-            
-            return clsTestTypeData.IsTestTypeExist(TestTypeID);
-        }
     }
 }
